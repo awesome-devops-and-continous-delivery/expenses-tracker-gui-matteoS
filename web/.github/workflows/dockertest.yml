@@ -1,0 +1,17 @@
+name: Dockertest
+on: [push]
+jobs: 
+  simple_docker_test:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+      with:
+        ref: refs/heads/master
+    - name: docker build 
+      run: docker build -t image-name . 
+    - name: print confirm build 
+      run: echo "build operation done"
+    - name: docker run 
+      run: docker run -d -p 8080:80 --name container-name image-name
+    - name: print confirm run
+      run: echo "run operation done"
